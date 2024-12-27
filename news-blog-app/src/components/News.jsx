@@ -83,6 +83,31 @@ const News = () => {
                 <i className="fa-regular fa-bookmark bookmark"></i>
               </h3>
             </div>
+            <div className="news-grid-item">
+              <img src={sportsImg} alt="Sports Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className="fa-regular fa-bookmark bookmark"></i>
+              </h3>
+            </div><div className="news-grid-item">
+              <img src={scienceImg} alt="Sciences Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className="fa-regular fa-bookmark bookmark"></i>
+              </h3>
+            </div><div className="news-grid-item">
+              <img src={worldImg} alt="Worlds Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className="fa-regular fa-bookmark bookmark"></i>
+              </h3>
+            </div><div className="news-grid-item">
+              <img src={nationImg} alt="Nations Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className="fa-regular fa-bookmark bookmark"></i>
+              </h3>
+            </div>
           </div>
         </div>
         <div className="my-blogs">My Blogs</div>
