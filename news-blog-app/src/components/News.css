@@ -157,6 +157,9 @@
   background-color: #111214;
   border-radius: 1rem;
 }
+
+.news-grid-item img {
+}
 .my-blogs {
   width: clamp(20rem, 27cqi, 28%);
   height: 100%;
