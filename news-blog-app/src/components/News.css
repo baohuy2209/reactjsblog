@@ -54,6 +54,7 @@
   transform: translateY(-50%);
   color: #bbb;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .news-content {
   display: flex;
@@ -95,7 +96,7 @@
 
 .categories {
   width: 100%;
-  height: calc(80% - 2rem);
+  height: calc(82%);
   background-color: #111214;
   border-radius: 1rem;
   display: flex;
@@ -114,10 +115,11 @@
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+  padding: 0 0 0 1rem;
 }
 
 .nav-link {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 300;
   color: #ddd;
   text-transform: uppercase;
@@ -142,13 +144,36 @@
   background-color: #111214;
   border-radius: 1rem;
   margin-bottom: 2rem;
+  position: relative;
 }
-
+.headline-title {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1rem 4rem 1rem 1rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.5rem, 1.8cqi, 3rem);
+  letter-spacing: 0.1rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0 0 1rem 1rem;
+}
+.headline-title i {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+}
+.bookmark {
+  position: absolute;
+  bottom: 1rem;
+}
 .headline img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 1rem;
+  opacity: 0.4;
 }
 
 .news-grid {
@@ -156,9 +181,42 @@
   height: 50%;
   background-color: #111214;
   border-radius: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1.8rem;
+  justify-content: center;
+  align-items: center;
+}
+.news-grid-item {
+  width: 100%;
+  height: 100%;
+  min-height: 10rem;
+  border-radius: 1rem;
+  position: relative;
 }
 
 .news-grid-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 1rem;
+  opacity: 0.4;
+}
+.news-grid-item h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1rem 3rem 1rem 1rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 100;
+  line-height: 1.4rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  border-radius: 0 0 1rem 1rem;
 }
 .my-blogs {
   width: clamp(20rem, 27cqi, 28%);
