@@ -40,6 +40,7 @@ const News = () => {
       )
         ? prevBookmarks.filter((bookmark) => bookmark.title !== article.title)
         : [...prevBookmarks, article];
+      localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
       return updatedBookmarks;
     });
   };
@@ -72,6 +73,9 @@ const News = () => {
     });
     setHeadline(fetchNews[0]);
     setNews(fetchNews.slice(1, 7));
+
+    const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    setBookmarks(savedBookmarks);
   };
   const handleCategoryClick = (e, category) => {
     e.preventDefault();
@@ -82,7 +86,7 @@ const News = () => {
   }, [selectedCategory, searchQuery]);
   return (
     <div className="news">
-      <headers className="news-header">
+      <header className="news-header">
         <h1 className="logo">News & Blogs</h1>
         <div className="search-bar">
           <form onSubmit={handleSearch}>
@@ -97,7 +101,7 @@ const News = () => {
             </button>
           </form>
         </div>
-      </headers>
+      </header>
       <div className="news-content">
         <div className="navbar">
           <div className="user">
@@ -117,7 +121,11 @@ const News = () => {
                   {category}
                 </a>
               ))}
-              <a href="#" className="nav-link">
+              <a
+                href="#"
+                className="nav-link"
+                onClick={() => setShowBookmarkModel(true)}
+              >
                 Bookmarks <i className="fa-regular fa-bookmark"></i>
               </a>
             </div>
@@ -135,7 +143,7 @@ const News = () => {
                 <i
                   className={`${
                     bookmarks.some(
-                      (bookmark) => bookmark.title === article.title
+                      (bookmark) => bookmark.title === headline.title
                     )
                       ? "fa-solid"
                       : "fa-regular"
@@ -169,7 +177,7 @@ const News = () => {
                     } fa-bookmark bookmark`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleBookmarkClick(headline);
+                      handleBookmarkClick(article);
                     }}
                   ></i>
                 </h3>
