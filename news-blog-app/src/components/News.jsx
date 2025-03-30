@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
@@ -9,9 +10,12 @@ import userImg from "../assets/images/avatar.jpg";
 // import worldImg from "../assets/images/world.jpg";
 // import healthImg from "../assets/images/health.jpg";
 // import nationImg from "../assets/images/nation.jpg";
+import noImg from "../assets/images/demo.jpg";
 import axios from "axios";
 import NewBoxModal from "./NewBoxModal";
 import BookMarks from "./BookMarks";
+import BlogModal from "./BlogModal";
+import { useNavigate } from "react-router-dom";
 const categories = [
   "general",
   "world",
@@ -23,7 +27,7 @@ const categories = [
   "health",
   "nation",
 ];
-const News = () => {
+const News = ({ blogs, onEditBlog, onDeleteBlog }) => {
   const [headline, setHeadline] = React.useState(null);
   const [news, setNews] = React.useState([]);
   const [selectedCategory, setSelectedCategory] = React.useState("general");
@@ -33,6 +37,9 @@ const News = () => {
   const [selectedArticle, setSelectedArticle] = React.useState(null);
   const [bookmarks, setBookmarks] = React.useState([]);
   const [showBookmarkModel, setShowBookmarkModel] = React.useState(false);
+  const [selectedPost, setSelectedPost] = React.useState(null);
+  const [showBlogModal, setShowBlogModal] = React.useState(false);
+  const navigate = useNavigate();
   const handleBookmarkClick = (article) => {
     setBookmarks((prevBookmarks) => {
       const updatedBookmarks = prevBookmarks.find(
@@ -81,8 +88,16 @@ const News = () => {
     e.preventDefault();
     setSelectedCategory(category);
   };
+  const handleBlogClick = (posted) => {
+    setSelectedPost(posted);
+    setShowBlogModal(true);
+  };
+  const handleCloseBlogModal = () => {
+    setShowBlogModal(false);
+  };
   React.useEffect(() => {
     fetchNews(selectedCategory);
+    console.log(blogs);
   }, [selectedCategory, searchQuery]);
   return (
     <div className="news">
@@ -127,6 +142,9 @@ const News = () => {
                 onClick={() => setShowBookmarkModel(true)}
               >
                 Bookmarks <i className="fa-regular fa-bookmark"></i>
+              </a>
+              <a href="/blogs" className="nav-link">
+                Create new post
               </a>
             </div>
           </nav>
@@ -197,13 +215,57 @@ const News = () => {
           onSelectArticle={handleArticleClick}
           onDeleteBookmark={handleArticleClick}
         />
-        <div className="my-blogs">My Blogs</div>
+        <div className="my-blogs">
+          <h1 className="my-blogs-heading">My Blogs</h1>
+          <div className="blog-posts">
+            {blogs.map((blog, index) => (
+              <div
+                key={index}
+                className="blog-post"
+                onClick={() => handleBlogClick(blog)}
+              >
+                <img src={blog.image || noImg} alt={blog.title} />
+                <h3>{blog.title}</h3>
+                <div className="post-buttons">
+                  <button
+                    className="edit-post"
+                    onClick={() => {
+                      onEditBlog(blog);
+                      navigate("/blogs");
+                    }}
+                  >
+                    <i className="bx bxs-edit"></i>
+                  </button>
+                  <button
+                    className="delete-post"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDeleteBlog(blog);
+                    }}
+                  >
+                    <i className="bx bxs-x-circle"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <BlogModal
+            showBlogModal={showBlogModal}
+            selectedPost={selectedPost}
+            onClose={handleCloseBlogModal}
+          />
+        </div>
         <div className="weather-calendar">
           <Weather />
           <Calendar />
         </div>
       </div>
-      <footer className="news-footer">Footer</footer>
+      <footer className="news-footer">
+        <p>
+          <span>News & Blogs App</span>
+        </p>
+        <p>&copy: All Right Reserved. By Nguyen Bao Huy</p>
+      </footer>
     </div>
   );
 };
