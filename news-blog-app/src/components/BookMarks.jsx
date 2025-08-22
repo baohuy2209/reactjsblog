@@ -5,7 +5,6 @@ const BookMarks = ({
   show,
   bookmarks,
   onClose,
-  onSelectArticle,
   onDeleteBookmark,
 }) => {
   if (!show) {
